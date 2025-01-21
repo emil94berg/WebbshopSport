@@ -8,6 +8,7 @@ namespace WebbshopSport.Models
 {
     internal class OrderItem
     {
+        public int Id { get; set; }
         public int ShoppingCartId { get; set; }
         public virtual ShoppingCart ShoppingCart { get; set; }
         public int ProductId { get; set; }

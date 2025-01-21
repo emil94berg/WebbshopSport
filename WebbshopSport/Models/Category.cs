@@ -10,6 +10,8 @@ namespace WebbshopSport.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        //public int ProductId { get; set; }
+        //public  virtual Product Product { get; set; } // går det att ta väck kategorier som är kopplade till produkter?
         public virtual ICollection<Product> Products { get; set; }
     }
 }

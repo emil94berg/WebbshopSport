@@ -18,6 +18,7 @@ namespace WebbshopSport.Models
         public string PhoneNumber { get; set; }
         public int Age { get; set; }
         public bool Admin { get; set; }
+        public int ShoppingCartId { get; set; }
         public virtual ShoppingCart ShoppingCart { get; set; }
     }
 }
