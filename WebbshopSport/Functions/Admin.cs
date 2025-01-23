@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -270,6 +272,81 @@ namespace WebbshopSport.Functions
 
 
             }
+        }
+        public static void CreateShoppingCostumer()
+        {
+            using (var db = new MyDbContext())
+            {
+                ShoppingCart cart = new ShoppingCart();
+                db.ShoppingCarts.Add(cart);
+                db.SaveChanges();
+
+                Console.WriteLine("Name of costumer: ");
+                string costumerName = Console.ReadLine();
+                Console.WriteLine("Street: ");
+                string street = Console.ReadLine();
+                Console.WriteLine("City: ");
+                string city = Console.ReadLine();
+                Console.WriteLine("Country: ");
+                string country = Console.ReadLine();
+                Console.WriteLine("Email: ");
+                string email = Console.ReadLine();
+                Console.WriteLine("Zip code: ");
+                int zipCode = int.Parse(Console.ReadLine());
+                Console.WriteLine("Phone number: ");
+                string phoneNumber = Console.ReadLine();
+                Console.WriteLine("Age: ");
+                int age = int.Parse(Console.ReadLine());
+                Console.WriteLine("Admin? typ 'y' or any key to continue");
+                string admin = Console.ReadLine();
+                bool isAdmin = false;
+                if (admin == "y")
+                {
+                    isAdmin = true;
+                }
+                else
+                {
+                    isAdmin = false;
+                }
+                var shoppingCartId = cart.Id;
+
+                Models.Customer customer = new Models.Customer()
+                {
+                    Name = costumerName,
+                    Address = street,
+                    City = city,
+                    Country = country,
+                    Email = email,
+                    ZipCode = zipCode,
+                    PhoneNumber = phoneNumber,
+                    Age = age,
+                    Admin = isAdmin,
+                    ShoppingCartId = shoppingCartId
+                };
+                
+                db.Customers.Add(customer);
+                db.SaveChanges();
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
