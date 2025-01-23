@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using WebbshopSport.GraphWindow;
 using WebbshopSport.Models;
 
@@ -8,15 +10,28 @@ namespace WebbshopSport
     {
         static void Main(string[] args)
         {
-
-
             GraphWindow.Frontpage.LogIn();
             int loggedIn = int.Parse(Console.ReadLine());
-
-
             while (true)
             {
-                Console.ReadKey(true);
+                using (var db = new MyDbContext())
+                {
+                    if (db.Customers.Where(x => x.Id == loggedIn).Select(x => x.Id).SingleOrDefault() == loggedIn)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        GraphWindow.Frontpage.LogIn();
+                        Console.WriteLine("Wrong Id, try again: ");
+                        loggedIn = int.Parse(Console.ReadLine());
+                    }
+                }
+            }
+            while (true)
+            {
+                
                 Console.Clear();
                 GraphWindow.Frontpage.LoggedIn(loggedIn);
                 GraphWindow.Frontpage.ChoosenProducts();
@@ -36,16 +51,8 @@ namespace WebbshopSport
                         Functions.Menus.ShowCategory(3);
                         break;
                 }
+                Console.ReadKey();
             }
-
-
-
-
-
-
-
-
-
             //Functions.Admin.AddCategory();
             //Functions.Admin.AddSupplier();
             //while(true)
@@ -59,11 +66,6 @@ namespace WebbshopSport
             //Functions.Admin.DeleteProduct();
             //Functions.Admin.ChangeProduct();
             //Functions.Admin.CreateShoppingCostumer();
-
-
-
-
-
         }
     }
 }
