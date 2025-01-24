@@ -27,6 +27,7 @@ namespace WebbshopSport
                         Console.WriteLine("Wrong Id, try again: ");
                         loggedIn = int.Parse(Console.ReadLine());
                     }
+                    
                 }
             }
             while (true)
@@ -34,21 +35,25 @@ namespace WebbshopSport
                 
                 Console.Clear();
                 GraphWindow.Frontpage.LoggedIn(loggedIn);
-                GraphWindow.Frontpage.ChoosenProducts();
+                GraphWindow.Frontpage.ChoosenProducts(loggedIn);
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 switch (key.KeyChar)
                 {
                     case '1':
                         Console.Clear();
-                        Functions.Menus.ShowCategory(1);
+                        Functions.Menus.ShowCategory(1, loggedIn);
                         break;
                     case '2':
                         Console.Clear();
-                        Functions.Menus.ShowCategory(2);
+                        Functions.Menus.ShowCategory(2, loggedIn);
                         break;
                     case '3':
                         Console.Clear();
-                        Functions.Menus.ShowCategory(3);
+                        Functions.Menus.ShowCategory(3, loggedIn);
+                        break;
+                    case 'x':
+                        Console.Clear();
+                        GraphWindow.Frontpage.AdminView(loggedIn);
                         break;
                 }
                 Console.ReadKey();
