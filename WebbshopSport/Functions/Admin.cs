@@ -326,15 +326,6 @@ namespace WebbshopSport.Functions
                 
                 db.Customers.Add(customer);
                 db.SaveChanges();
-
-
-
-
-
-
-
-
-
             }
 
 

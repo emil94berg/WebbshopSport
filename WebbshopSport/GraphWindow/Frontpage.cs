@@ -22,22 +22,68 @@ namespace WebbshopSport.GraphWindow
                 var welcomeWindow = new Window("",48, 0, Welcome);
                 welcomeWindow.Draw();
 
-                var testList = db.Products.Where(x => x.CategoryId == 1 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
-                //var textBox1 = db.Categories.Where(x => x.Id == 1).Select(x => $"{x.Name}").SingleOrDefault().ToString();
-                var windowCart = new Window("Offer in Football", 0, 4, testList);
+                List<string> cat1 = new List<string>()
+                {
+                    ""
+                };
+
+                if (db.Products.Where(x => x.CategoryId == 1).Any(x => x.Choosen) == true)
+                {
+                    cat1 = db.Products.Where(x => x.CategoryId == 1 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
+                }
+                else
+                {
+                    cat1 = new List<string>()
+                    {
+                        "No offers here"
+                    };
+                }
+
+                var windowCart = new Window("Offer in Football", 0, 4, cat1);
                 windowCart.Draw();
 
 
-                string testString = testList.ToString();
+                List<string> cat2 = new List<string>()
+                {
+                    ""
+                };
+                string testString = cat1.ToString();
                 int fromLeft = (testString.Length);
-                var testList1 = db.Products.Where(x => x.CategoryId == 2 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
-                var windowCart1 = new Window("Offer in Icehockey", fromLeft, 4, testList1);
+                if (db.Products.Where(x => x.CategoryId == 2).Any(x => x.Choosen) == true)
+                {
+                    cat2 = db.Products.Where(x => x.CategoryId == 2 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
+                }
+                else
+                {
+                    cat2 = new List<string>()
+                    {
+                        "No offers here"
+                    };
+                }
+                //var testList1 = db.Products.Where(x => x.CategoryId == 2 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
+                var windowCart1 = new Window("Offer in Icehockey", fromLeft, 4, cat2);
                 windowCart1.Draw();
 
-                string testString1 = testList1.ToString();
+                List<string> cat3 = new List<string>()
+                {
+                    ""
+                };
+                string testString1 = cat2.ToString();
                 int fromLeft1 = (fromLeft + testString1.Length);
-                var testList2 = db.Products.Where(x => x.CategoryId == 3 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
-                var windowCart2 = new Window("Offer in Basketball", fromLeft1, 4, testList2);
+                if (db.Products.Where(x => x.CategoryId == 3).Any(x => x.Choosen) == true)
+                {
+                    cat3 = db.Products.Where(x => x.CategoryId == 3 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
+                }
+                else
+                {
+                    cat3 = new List<string>()
+                    {
+                        "No offers here"
+                    };
+                }
+
+                //var testList2 = db.Products.Where(x => x.CategoryId == 3 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
+                var windowCart2 = new Window("Offer in Basketball", fromLeft1, 4, cat3);
                 windowCart2.Draw();
 
                 var catergoryList = db.Categories.Select(x => $"{x.Id} : {x.Name}").ToList();
@@ -60,7 +106,7 @@ namespace WebbshopSport.GraphWindow
                     var orderItemsList = db.OrderItems.Where(x => x.ShoppingCartId == thisCostumer).ToList();
                     for(int i = 0; i < orderItemsList.Count(); i++)
                     {
-                        orderItemsView.Add($"{productNameFromOrderId[i]}. Quantity: {orderItemsList[i].Quantity}. Price: {(orderItemsList[i].Quantity * orderItemsList[i].Price)} :-");
+                        orderItemsView.Add($"ProductId: {orderItemsList[i].ProductId} {productNameFromOrderId[i]}. Quantity: {orderItemsList[i].Quantity}. Price: {(orderItemsList[i].Quantity * orderItemsList[i].Price)} :-");
                     }
                         //.Select(x => $"{productNameFromOrderId[0]}. Quantity: {x.Quantity}. Price: {x.Quantity * x.Price} :-").ToList();
                     var windowOrderItems = new Window("Items in cart", 48, 8, orderItemsView);
@@ -72,9 +118,18 @@ namespace WebbshopSport.GraphWindow
                     //ska visa en list med allt i orderitems som är kopplat till den inloggade personen
                 }
 
+                List<string> extra = new List<string>()
+                {
+                    "Press A for admin",
+                    "Press S to search",
+                    "Press Y to alter shoppingcart"
+                };
+                var extraWindow = new Window("", 109, 8, extra);
+                extraWindow.Draw();
 
-
+                
             }
+
         }
         public static void LogIn()
         {

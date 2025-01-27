@@ -51,9 +51,30 @@ namespace WebbshopSport
                         Console.Clear();
                         Functions.Menus.ShowCategory(3, loggedIn);
                         break;
-                    case 'x':
+                    case 'a':
                         Console.Clear();
                         GraphWindow.Frontpage.AdminView(loggedIn);
+                        break;
+                    case 's':
+                        var searchList = new List<Models.Product>();
+                        Console.Write("Search for: ");
+                        string search = Console.ReadLine();
+                        searchList = Functions.Dapper.GetWantedProduct(search);
+
+                        if (searchList.Count > 0)
+                        {
+                            foreach (Models.Product product in searchList)
+                            {
+                                Console.WriteLine(product.Name + " | Can be found under categoryId: " + product.CategoryId);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Could not find what you were looking for");
+                        }
+                        break;
+                    case 'y':
+                        Functions.Menus.RemoveFromCart(loggedIn);
                         break;
                 }
                 Console.ReadKey();

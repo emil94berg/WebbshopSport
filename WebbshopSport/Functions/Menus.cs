@@ -49,7 +49,7 @@ namespace WebbshopSport.Functions
                         Quantity = howMany
                     };
                     db.OrderItems.Add(addToCart);
-                    //db.SaveChanges();
+                    db.SaveChanges();
                 }
                 else
                 {
@@ -57,6 +57,25 @@ namespace WebbshopSport.Functions
                 }
             }
         }
+        public static void RemoveFromCart(int loggedIn)
+        {
+            using (var db = new MyDbContext())
+            {
+                int shoppingNumber = db.Customers.Where(x => x.Id == loggedIn).Select(x => x.ShoppingCartId).SingleOrDefault();
+                Console.WriteLine("Type productId: of product you want to remove: ");
+                int removeId = int.Parse(Console.ReadLine());
+                //var myOrderItems = db.OrderItems.Where(x => x.ShoppingCartId == shoppingNumber).Select(x => x.ProductId == removeId).SingleOrDefault();
+                db.Remove(db.OrderItems.Single(x => x.ProductId == removeId && x.ShoppingCartId == shoppingNumber));
+                db.SaveChanges();
+
+                //db.Remove(db.Suppliers.Single(x => x.Id == deleteId));
+                //foreach (var item in myOrderItems)
+                //{
+                //    Console.WriteLine(item);
+                //}
+            }
+        }
+        
 
     }
 }
