@@ -8,7 +8,7 @@ namespace WebbshopSport
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             GraphWindow.Frontpage.LogIn();
             int loggedIn = int.Parse(Console.ReadLine());
@@ -59,7 +59,7 @@ namespace WebbshopSport
                         var searchList = new List<Models.Product>();
                         Console.Write("Search for: ");
                         string search = Console.ReadLine();
-                        searchList = Functions.Dapper.GetWantedProduct(search);
+                        searchList = await Functions.Dapper.GetWantedProduct(search);
 
                         if (searchList.Count > 0)
                         {
@@ -75,6 +75,10 @@ namespace WebbshopSport
                         break;
                     case 'y':
                         Functions.Menus.RemoveFromCart(loggedIn);
+                        break;
+                    case 'c':
+                        Console.Clear();
+                        Functions.Menus.ShippmentView(loggedIn);
                         break;
                 }
                 Console.ReadKey();

@@ -26,7 +26,6 @@ namespace WebbshopSport.GraphWindow
                 {
                     ""
                 };
-
                 if (db.Products.Where(x => x.CategoryId == 1).Any(x => x.Choosen) == true)
                 {
                     cat1 = db.Products.Where(x => x.CategoryId == 1 && x.Choosen == true).Select(x => $"{x.Name} | Price: {x.Price} | {x.Description}").ToList();
@@ -38,7 +37,6 @@ namespace WebbshopSport.GraphWindow
                         "No offers here"
                     };
                 }
-
                 var windowCart = new Window("Offer in Football", 0, 4, cat1);
                 windowCart.Draw();
 
@@ -100,17 +98,26 @@ namespace WebbshopSport.GraphWindow
                     var productNameFromOrderId = (from orderItem in db.OrderItems
                                                   join products in db.Products
                                                   on orderItem.ProductId equals products.Id
-                                                  where orderItem.ShoppingCartId == thisCostumer
+                                                  where orderItem.ShoppingCartId == thisCostumer && orderItem.Payed == false
                                                   select products.Name).ToList();
                     List<string> orderItemsView = new List<string>();
-                    var orderItemsList = db.OrderItems.Where(x => x.ShoppingCartId == thisCostumer).ToList();
+                    //ändrade && false för att testa
+                    var orderItemsList = db.OrderItems.Where(x => x.ShoppingCartId == thisCostumer && x.Payed == false).ToList();
                     for(int i = 0; i < orderItemsList.Count(); i++)
                     {
-                        orderItemsView.Add($"ProductId: {orderItemsList[i].ProductId} {productNameFromOrderId[i]}. Quantity: {orderItemsList[i].Quantity}. Price: {(orderItemsList[i].Quantity * orderItemsList[i].Price)} :-");
+                        orderItemsView.Add($"ProductId: {orderItemsList[i].ProductId} {productNameFromOrderId[i]}. Quantity: {orderItemsList[i].Quantity}. Price: {orderItemsList[i].Price} :-");
                     }
                         //.Select(x => $"{productNameFromOrderId[0]}. Quantity: {x.Quantity}. Price: {x.Quantity * x.Price} :-").ToList();
                     var windowOrderItems = new Window("Items in cart", 48, 8, orderItemsView);
-                    windowOrderItems.Draw(); 
+
+                    if (orderItemsView.Count > 0)
+                    {
+                        windowOrderItems.Draw();  
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
@@ -122,7 +129,8 @@ namespace WebbshopSport.GraphWindow
                 {
                     "Press A for admin",
                     "Press S to search",
-                    "Press Y to alter shoppingcart"
+                    "Press Y to alter shoppingcart",
+                    "Press C to checkout"
                 };
                 var extraWindow = new Window("", 109, 8, extra);
                 extraWindow.Draw();
@@ -166,6 +174,7 @@ namespace WebbshopSport.GraphWindow
                     "Press e to update Supplier",
                     "Press r to delete Product",
                     "Press u to delete Supplier",
+                    "Press 1 to see Query",
                     "Press q to quit"
                 };
                 while (true)
@@ -208,6 +217,9 @@ namespace WebbshopSport.GraphWindow
                                 break;
                             case 'q':
                                 return;
+                            case '1':
+                                Functions.Query.Shoppoholic();
+                                break;
                         }
                     }
                     else

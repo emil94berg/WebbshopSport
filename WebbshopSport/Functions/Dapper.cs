@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using WebbshopSport.Models;
+using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
+
 
 namespace WebbshopSport.Functions
 {
@@ -13,7 +18,7 @@ namespace WebbshopSport.Functions
         static string connString = "data source=.\\SQLEXPRESS; initial catalog=WebbshopSport; persist security info=True; " +
             "Integrated Security=True;";
 
-        public static List<Models.Product> GetWantedProduct(string search)
+        public static async Task<List<Models.Product>> GetWantedProduct(string search)
         {
             string sql = $"SELECT * FROM Products WHERE Name LIKE '%{search}%'";
 
@@ -21,9 +26,19 @@ namespace WebbshopSport.Functions
 
             using (var connection = new SqlConnection(connString))
             {
-                product = connection.Query<Models.Product>(sql).ToList();
+                product = (await connection.QueryAsync<Models.Product>(sql)).ToList();
+
             }
             return product;
         }
+
+        //public static async Task<List<Models.Car>> GetCarsAsync(MyDbContext db)
+        //{
+        //    Console.WriteLine("Hämtar från databas");
+        //    var cars = await db.Cars.ToListAsync();  //Kräver EntityFrameWorkCore
+        //    Console.WriteLine("Hämtat från databas");
+        //    return cars;
+
+        //}
     }
 }
