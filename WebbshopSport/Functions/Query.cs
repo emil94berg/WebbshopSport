@@ -41,6 +41,7 @@ namespace WebbshopSport.Functions
                                 .OrderByDescending(o => o.TotalSold).FirstOrDefault();
                 var nameOfProduct = db.Products.Where(x => x.Id == mostSold.ProductId).Select(x => x.Name).FirstOrDefault();
                 Console.WriteLine($"Most sold product: {nameOfProduct}. Ammount sold: {mostSold.TotalSold}");
+                Console.WriteLine("------------------");
                 Console.ReadKey();
             }
         }
