@@ -82,7 +82,7 @@ namespace WebbshopSport.Functions
                 Console.WriteLine("Type productId: of the product you want to remove: ");
                 int removeId = int.Parse(Console.ReadLine());
                 //var myOrderItems = db.OrderItems.Where(x => x.ShoppingCartId == shoppingNumber).Select(x => x.ProductId == removeId).SingleOrDefault();
-                db.Remove(db.OrderItems.Single(x => x.ProductId == removeId && x.ShoppingCartId == shoppingNumber));
+                db.Remove(db.OrderItems.Single(x => x.ProductId == removeId && x.ShoppingCartId == shoppingNumber && x.Payed == false));
                 db.SaveChanges();
 
                 //db.Remove(db.Suppliers.Single(x => x.Id == deleteId));

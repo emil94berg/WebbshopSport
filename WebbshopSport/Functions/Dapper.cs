@@ -8,6 +8,7 @@ using Dapper;
 using WebbshopSport.Models;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.Extensions.Options;
 
 
 
@@ -17,6 +18,7 @@ namespace WebbshopSport.Functions
     {
         static string connString = "data source=.\\SQLEXPRESS; initial catalog=WebbshopSport; persist security info=True; " +
             "Integrated Security=True;";
+        //static string connString = "Server=tcp:emildb.database.windows.net,1433;Initial Catalog=emilsdb;Persist Security Info=False;User ID=emilb123;Password=Emiltheo!123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         public static async Task<List<Models.Product>> GetWantedProduct(string search)
         {

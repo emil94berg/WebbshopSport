@@ -10,6 +10,13 @@ namespace WebbshopSport
     {
         static async Task Main(string[] args)
         {
+            //while (true)
+            //{
+            //    Functions.Admin.AddProduct();
+            //    Console.Clear();
+            //    Console.WriteLine("Klar, starta om");
+            //    Console.ReadLine();
+            //}
             GraphWindow.Frontpage.LogIn();
             int loggedIn = int.Parse(Console.ReadLine());
             while (true)
