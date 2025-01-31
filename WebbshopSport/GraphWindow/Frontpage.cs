@@ -175,6 +175,7 @@ namespace WebbshopSport.GraphWindow
                     "Press r to delete Product",
                     "Press u to delete Supplier",
                     "Press 1 to see Query",
+                    "Press 2 to delete Category",
                     "Press q to quit"
                 };
                 while (true)
@@ -219,6 +220,9 @@ namespace WebbshopSport.GraphWindow
                                 return;
                             case '1':
                                 Functions.Query.Shoppoholic();
+                                break;
+                            case '2':
+                                Functions.Admin.DeleteCategory();
                                 break;
                         }
                     }

@@ -34,13 +34,6 @@ namespace WebbshopSport.Functions
             return product;
         }
 
-        //public static async Task<List<Models.Car>> GetCarsAsync(MyDbContext db)
-        //{
-        //    Console.WriteLine("Hämtar från databas");
-        //    var cars = await db.Cars.ToListAsync();  //Kräver EntityFrameWorkCore
-        //    Console.WriteLine("Hämtat från databas");
-        //    return cars;
-
-        //}
+        
     }
 }

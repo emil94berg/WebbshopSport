@@ -328,6 +328,7 @@ namespace WebbshopSport.Functions
                 db.SaveChanges();
             }
 
+            
 
 
 
@@ -338,6 +339,27 @@ namespace WebbshopSport.Functions
 
 
 
+
+        }
+        public static void DeleteCategory()
+        {
+            using (var db = new MyDbContext())
+            {
+                var categoryList = db.Categories.ToList();
+
+                Console.WriteLine($"Which product do you want to remove?");
+                foreach (var category in categoryList)
+                {
+
+                    Console.Write(category.Id + ": " + category.Name + " ");
+
+                }
+                Console.WriteLine();
+                int deleteId = int.Parse(Console.ReadLine());
+                db.Remove(db.Categories.Single(x => x.Id == deleteId));
+                db.SaveChanges();
+
+            }
         }
     }
 }
