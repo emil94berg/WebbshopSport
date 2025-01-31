@@ -22,7 +22,7 @@ namespace WebbshopSport.Functions
 
         public static async Task<List<Models.Product>> GetWantedProduct(string search)
         {
-            string sql = $"SELECT * FROM Products WHERE Name LIKE '%{search}%'";
+            string sql = $"SELECT * FROM Products WHERE Name LIKE '%{search}%' or Description LIKE '%{search}%'";
 
             List<Models.Product> product = new List<Models.Product>();
 

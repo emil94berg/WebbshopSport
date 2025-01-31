@@ -21,7 +21,7 @@ namespace WebbshopSport.Functions
                 
                 int ammount = showCategory.Count();
                 Console.WriteLine("Choose product: ");
-                //int productAnswear = int.Parse(Console.ReadLine());
+                
                 if(int.TryParse(Console.ReadLine(), out int productAnswear))
                 {
                     try
@@ -84,12 +84,6 @@ namespace WebbshopSport.Functions
                 //var myOrderItems = db.OrderItems.Where(x => x.ShoppingCartId == shoppingNumber).Select(x => x.ProductId == removeId).SingleOrDefault();
                 db.Remove(db.OrderItems.Single(x => x.ProductId == removeId && x.ShoppingCartId == shoppingNumber && x.Payed == false));
                 db.SaveChanges();
-
-                //db.Remove(db.Suppliers.Single(x => x.Id == deleteId));
-                //foreach (var item in myOrderItems)
-                //{
-                //    Console.WriteLine(item);
-                //}
             }
         }
         public static void ShippmentView(int loggedIn)
@@ -135,7 +129,7 @@ namespace WebbshopSport.Functions
                     {
                         orderItemsView.Add($"ProductId: {orderItemsList[i].ProductId} {productNameFromOrderId[i]}. Quantity: {orderItemsList[i].Quantity}. Price: {orderItemsList[i].Price} :-");
                     }
-                    //.Select(x => $"{productNameFromOrderId[0]}. Quantity: {x.Quantity}. Price: {x.Quantity * x.Price} :-").ToList();
+                    
                     var windowOrderItems = new Window("Items in cart", 0, (costumerList.Count + 2), orderItemsView);
 
                     if (orderItemsList.Count > 0)

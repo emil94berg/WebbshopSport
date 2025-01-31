@@ -107,7 +107,6 @@ namespace WebbshopSport.GraphWindow
                     {
                         orderItemsView.Add($"ProductId: {orderItemsList[i].ProductId} {productNameFromOrderId[i]}. Quantity: {orderItemsList[i].Quantity}. Price: {orderItemsList[i].Price} :-");
                     }
-                        //.Select(x => $"{productNameFromOrderId[0]}. Quantity: {x.Quantity}. Price: {x.Quantity * x.Price} :-").ToList();
                     var windowOrderItems = new Window("Items in cart", 48, 8, orderItemsView);
 
                     if (orderItemsView.Count > 0)

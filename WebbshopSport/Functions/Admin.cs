@@ -16,8 +16,10 @@ namespace WebbshopSport.Functions
         {
             using (var db = new MyDbContext())
             {
+                //För att kunna displaya Categorier när man får cälja
                 var categories = (from Category in db.Categories
                                  select Category).ToList();
+                //För att kunna displaya Suppliers när man får välja
                 var suppliers = (from Supplier in db.Suppliers
                                  select Supplier).ToList();
                 Console.WriteLine("Name of product: ");
@@ -92,6 +94,7 @@ namespace WebbshopSport.Functions
         }
         public static void AddSize()
         {
+            //Tänkte använda mig av size men gick en annan väg
             using (var db = new MyDbContext())
             {
                 Console.WriteLine("ProductId: ");
@@ -109,6 +112,7 @@ namespace WebbshopSport.Functions
             using (var db = new MyDbContext())
             {
                 var categoryList = db.Categories;
+                //För att kunna displaya Categories när man får välja
                 var categories = (from Category in db.Categories
                                   select Category).ToList();
                 Console.WriteLine($"Which category do you want to update?");
@@ -128,6 +132,7 @@ namespace WebbshopSport.Functions
             using (var db = new MyDbContext())
             {
                 var supplierList = db.Suppliers;
+                //För att kunna displaya suppliers när man får välja
                 var suppliers = (from Supplier in db.Suppliers
                                   select Supplier).ToList();
                 Console.WriteLine($"Which supplier do you want to update?");
@@ -277,6 +282,7 @@ namespace WebbshopSport.Functions
         {
             using (var db = new MyDbContext())
             {
+                //Skappar en shoppingcart först till personen som skapas
                 ShoppingCart cart = new ShoppingCart();
                 db.ShoppingCarts.Add(cart);
                 db.SaveChanges();
@@ -308,6 +314,7 @@ namespace WebbshopSport.Functions
                 {
                     isAdmin = false;
                 }
+                //För att koppla shoppingcawrt id till personen som skapas
                 var shoppingCartId = cart.Id;
 
                 Models.Customer customer = new Models.Customer()
